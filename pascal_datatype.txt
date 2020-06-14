@@ -1,0 +1,6 @@
+boolean
+char
+integer
+real
+string
+realint
