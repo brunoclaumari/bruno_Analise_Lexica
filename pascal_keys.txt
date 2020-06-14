@@ -24,6 +24,7 @@ In
 inline
 interface
 Label
+length
 mod
 nil
 not
@@ -37,6 +38,7 @@ read
 readln
 record
 repeat
+round
 set
 shl
 shr

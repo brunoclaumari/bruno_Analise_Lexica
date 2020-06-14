@@ -1,6 +1,7 @@
 boolean
 char
 integer
+longint
 real
 string
 realint
