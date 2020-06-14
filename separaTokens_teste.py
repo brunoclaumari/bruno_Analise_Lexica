@@ -6,19 +6,23 @@ pascal_datatype = ""
 pascal_operators = ""
 pascal_separators = ""
 
-
+#aqui vc lê o programa pascal que quer tratar
 with open('p3.pas', "r") as pkeys2:
     pascal_code = pkeys2.read().lower().splitlines()
 
+#adiciona as palavras reservadas do pascal em uma variável
 with open('pascal_keys.txt', "r") as pkeys:
     pascal_keys = pkeys.read().lower().split()
 
+#adiciona os tipos do pascal em uma variável
 with open('pascal_datatype.txt', "r") as pkeys:
     pascal_datatype = pkeys.read().lower().split()
 
+#adiciona os operadores do pascal em uma variável
 with open('pascal_operators.txt', "r") as pkeys:
     pascal_operators = pkeys.read().lower().split()
 
+#adiciona os separadores do pascal em uma variável
 with open('pascal_separators.txt', "r") as pkeys:
     pascal_separators = pkeys.read().lower().split()
 
@@ -90,18 +94,18 @@ testandoPascal.clear()
 
 listaTestandoPegaVariavel = []
 
-# passa pelo vetor, quebra os espaços, procura variaveis e depois elimina as strings vazias
+# passa pelo vetor, quebra os espaços, procura variaveis para adicionar
+# na lista de variaveis e depois elimina as strings vazias
 for item in pascalCortado:
-    #print(item)
+    
     if re.search(procVariaveis, item)!= None and ':=' not in item and '(' not in item:
         k=re.search(procVariaveis, item).group()
         res=k.split()
         
         for palav in res:
-            if palav!=','and palav!=':':
-                #if palav not in listaVariaveis:
+            if palav!=','and palav!=':':                
                 listaVariaveis.append(palav)
-                #print(palav)
+                
 
     teste = item.casefold().strip().split(' ')
     aux = []
@@ -109,10 +113,6 @@ for item in pascalCortado:
         if indiv != '':
             aux.append(indiv)
     testandoPascal.append(aux)
-
-# for xx in testandoPascal:
-#    print(xx)
-
 
 
 inic = 0
@@ -152,9 +152,7 @@ for itens in testandoPascal:
             lAux[inic] = ''
             inic += 1
 
-    # for proc in itens:
-    #    if abreComentario==True and fechaComentario==True:
-    #        proc = ''
+   
 
     # identifica o que é variável de function e adiciona na lista de variáveis
     if lAux[0] == 'function':
@@ -190,24 +188,8 @@ for itens in testandoPascal:
                         refIndex -= 2
                 aux += 1
 
-    # separa o que é variável e adiciona na lista de variáveis
-    '''
-    elif ':' in lAux and '(' not in lAux or lAux[0] == 'var':     
-        if len(lAux) > 1:
-            indice = lAux.index(':')
-            aux = 1
-            while aux < indice:
-                listaVariaveis.append(lAux[aux])
-                aux += 2
-        else:
-            aux = 0
-        while aux < len(lAux):
-                if lAux[aux] == ':' and lAux[aux+1] in pascal_datatype and not lAux[aux-1] in listaVariaveis:
-                    listaVariaveis.append(lAux[aux-1])
-                aux += 1  
-    '''
 
-    #
+    #passa por cada item separando os tokens
     for token in itens:
         if token in pascal_keys:
             lexemas.append([token, "key word"])
@@ -237,9 +219,18 @@ for woou in lexemas:
     print(woou)
 
 # escreve os tokens no arquivo
-# with open("tokens.txt", "w") as lexemas_text:
-#    lexemas_text.write(str(lexemas)+"\n")
+with open("tokens.txt", "w") as lexemas_text:
+    for woou in lexemas:
+        lexemas_text.write(str(woou))
+        lexemas_text.write('\n')
+        
 
+
+
+
+
+
+#DICAS DO PROFESSOR
 # 1. ler arquivo
 # 2. quebrar em tokens
 # 3. usar regexp para verificar o tipo de token
